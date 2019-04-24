@@ -1,0 +1,68 @@
+/*
+Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
+If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a and b are called amicable numbers.
+
+For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.
+
+Evaluate the sum of all the amicable numbers under 10000.
+*/
+
+
+import time, math
+start = time.time()
+
+a = 1
+b = 2
+SumA = 1
+SumB = 1
+SumOfNumbers = 0
+
+def sum_of_factors(n):
+    total = 1
+    for x in range(2, int(math.sqrt(n) + 1)):
+        if n % x == 0:
+            total += x
+            y = n // x
+            if y > x:
+                total += y
+    return total
+
+for i in range(3,10000):
+    try:
+        a = sum_of_factors(i)
+        b = sum_of_factors(a)
+        if a == b:
+            SumOfNumbers = SumOfNumbers + a + b
+            if b >= 10000:
+                SumOfNumbers = SumOfNumbers - b
+                print(b)
+            else:
+                SumOfNumbers = SumOfNumbers - (a + b)/2
+    except:
+        print(i)
+elapsed = (time.time() - start)
+print(elapsed)
+print(SumOfNumbers)
+
+
+
+############## Correct Answer. Looking into why my solution fails later
+import math
+
+def sum_div(n):
+    total = 1
+    for x in range(2, int(math.sqrt(n) + 1)):
+        if n % x == 0:
+            total += x
+            y = n // x
+            if y > x:
+                total += y
+    return total
+
+def amicable_numbers(limit):
+    for a in range(limit):
+        b = sum_div(a)
+        if a != b and sum_div(b) == a:
+            yield a
+
+print(sum(amicable_numbers(10000)))
