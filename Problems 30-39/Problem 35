@@ -1,0 +1,43 @@
+/*
+
+The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
+
+There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
+
+How many circular primes are there below one million?
+
+*/
+#### Note that this takes a while
+import time
+import math
+start = time.time()
+
+count = 0
+
+def is_prime(n):
+    if n % 2 == 0 and n > 2: 
+        return False
+    return all(n % i for i in range(3, int(math.sqrt(n)) + 1, 2))
+
+total = []
+
+
+###Creating list of primes.
+for i in range(2,1000001):
+    if is_prime(i) == True:
+        total.append(i)
+
+for x in range(len(total)):
+    s = str(total[x])
+    for i in range(len(s)):
+        testing = (s[i : ] + s[ : i])
+        if testing in str(total):
+            if i == len(s) - 1 :
+                count += 1
+        else:
+            break
+
+elapsed = time.time() - start
+
+Printed = "found {} in {} seconds".format(count,elapsed)
+print(Printed)
