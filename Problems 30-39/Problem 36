@@ -1,0 +1,63 @@
+/*
+
+The decimal number, 585 = 10010010012 (binary), is palindromic in both bases.
+
+Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.
+
+(Please note that the palindromic number, in either base, may not include leading zeros.)
+
+*/
+
+import time
+import math
+import string
+start = time.time()
+digs = string.digits + string.ascii_letters
+List = []
+
+def int2base(x, base):
+    if x < 0:
+        sign = -1
+    elif x == 0:
+        return digs[0]
+    else:
+        sign = 1
+    x *= sign
+    digits = []
+    while x:
+        digits.append(digs[int(x % base)])
+        x = int(x / base)
+    if sign < 0:
+        digits.append('-')
+    digits.reverse()
+    return ''.join(digits)
+
+def PalindromicTest(number):
+    #Even number of numbers
+    LenNum = len(str(number))
+    strNumber = str(number)
+    
+    if (LenNum % 2) == 0:
+        for i in range(int(LenNum/2)):
+            if strNumber[i] != strNumber[-i-1]:
+                return False         
+    if LenNum % 2 == 1:
+        for z in range(int((LenNum-1)/2)):
+            if strNumber[z] != strNumber[-z-1]:
+                return False
+    return True
+
+for app in range(1000000):
+    #Creates the first base 10 list
+    if PalindromicTest(app) == True:
+        List.append(app)
+
+for ab in range(len(List)):
+    Base2 =  int2base(List[ab],2)
+    if PalindromicTest(Base2)  == False:
+        List[ab] = 0
+                
+count = sum(List)
+elapsed = time.time() - start
+Printed = "found {} in {} seconds".format(count,elapsed)
+print(Printed)
