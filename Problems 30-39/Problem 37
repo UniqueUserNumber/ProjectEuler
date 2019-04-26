@@ -11,3 +11,51 @@ NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 */
 
 
+import time, math, string, sympy
+start = time.time()
+
+# Prime Range Est. for 10,000,000 range 
+PrimeRange = list(sympy.sieve.primerange(0,10000000))
+
+# list comprehension to reduce the range of primes to speed up the process a bit This looks at the tail end quickly
+PrimeRangeNew = [x for x in PrimeRange if sympy.isprime(x % 10)]
+
+PrimeRangeNew1 = [x for x in PrimeRangeNew if sympy.isprime(int(str(x)[:1]))]
+PrimeRange = PrimeRangeNew1 #Cleaning up
+
+count = 0
+PrimeSum = 0
+Test111 = 0
+
+for i in range(len(PrimeRange)):
+    if count == 11:
+        break
+    
+    TestPrime = PrimeRange[i]
+    n = 10
+    continueToNext = 0
+    for x in range(10): ### This will be broken anyways
+        if sympy.isprime(TestPrime % n) == False:
+            break
+        if (TestPrime % n) == TestPrime:
+            continueToNext = 1
+            Test111 += 1
+            break
+        n *= 10
+        
+    if continueToNext == 0:
+        continue
+    
+    n = 10
+    for x in range(10): #This is looking from the 
+        if sympy.isprime(TestPrime // n) == False:
+            break
+        if len(str(TestPrime // n)) == 1:
+            count += 1
+            PrimeSum += TestPrime
+            break
+        n *= 10
+
+elapsed = time.time() - start
+Printed = "found {} in {} seconds with {} primes".format(PrimeSum,elapsed, count)
+print(Printed)
