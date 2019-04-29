@@ -1,0 +1,29 @@
+/*
+
+If p is the perimeter of a right angle triangle with integral length sides, {a,b,c}, there are exactly three solutions for p = 120.
+
+{20,48,52}, {24,45,51}, {30,40,50}
+
+For which value of p ≤ 1000, is the number of solutions maximised?
+
+*/
+
+
+import time, math, string, sympy 
+start = time.time()
+
+Result = 0
+for x in range(1,1001):
+    TempResult = 0
+    for a in range(1, x + 1):
+    	for b in range(a, ((x - a) // 2 )+ 1):
+    		c = x - a - b  
+    		if a * a + b * b == c * c: #py theorem 
+    			TempResult += 1
+    if TempResult > Result:
+        Result = TempResult
+        Total = x
+
+elapsed = time.time() - start
+Printed = "found {} in {} seconds with {} Solution".format(Total,elapsed, Result)
+print(Printed)
