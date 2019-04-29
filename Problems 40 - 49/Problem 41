@@ -7,4 +7,28 @@ What is the largest n-digit pandigital prime that exists?
 
 */
 
-My solution is taking too long. I will come back to this later.
+#My solution is taking too long. I will come back to this later.
+#Please note that the pandigital number is less than 8 or 9 since the sum of the digits is 
+
+
+import time, math, string, sympy 
+
+
+def is_pandigital(nr):
+    digits = ''.join(map(str, range(1, 8)))
+    nr = str(nr)
+    for i in digits:
+        if str(i) not in nr[0:7]:
+            return False
+        if str(i) not in nr[-7:]:
+            return False
+
+    return True
+
+new_list = [x for x in range(7400000,7699999) if is_pandigital(x)]
+print(len(new_list))
+
+total = 0
+for i in range(len(new_list)):
+    if sympy.isprime(new_list[i]):
+        total = new_list[i]
