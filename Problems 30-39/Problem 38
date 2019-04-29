@@ -16,3 +16,17 @@ concatenated product of an integer with (1,2, ... , n) where n > 1?
 
 */
 
+import time, math, string, sympy 
+start = time.time()
+
+pand = ""
+for x in range(2, 10):
+	for i in range(1, 10**(9 // x)):
+		s = "".join(str(i * j) for j in range(1, x + 1))
+		if "".join(sorted(s)) == "123456789":
+			pand = max(s, pand)
+  
+
+elapsed = time.time() - start
+Printed = "found {} in {} seconds".format(pand,elapsed)
+print(Printed)
