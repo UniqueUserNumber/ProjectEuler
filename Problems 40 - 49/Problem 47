@@ -1,0 +1,59 @@
+/*
+
+The first two consecutive numbers to have two distinct prime factors are:
+
+14 = 2 × 7
+15 = 3 × 5
+
+The first three consecutive numbers to have three distinct prime factors are:
+
+644 = 2² × 7 × 23
+645 = 3 × 5 × 43
+646 = 2 × 17 × 19.
+
+Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers?
+
+*/
+
+import time, math, string, sympy 
+import numpy as np
+start = time.time()
+
+dicts = {}
+def primeFactors(n): 
+    key = []
+    org = n
+    while n % 2 == 0: 
+        key.append(2) 
+        n = n / 2
+          
+
+    for i in range(3,int(math.sqrt(n))+1,2): 
+          
+        while n % i== 0: 
+            key.append(i) 
+            n = n / i 
+              
+    if n > 2: 
+        key.append(n) 
+    unique_num = len(np.array(np.unique(key)))
+    dicts[org] = unique_num
+    
+
+for i in range(2,1000000):
+    primeFactors(i)
+
+ans = 0
+for x in range(2, len(dicts)):
+    if dicts[x] == 4:
+        if dicts[x+1] == 4:
+            if dicts[x+2] == 4:
+                if dicts[x+3] == 4:
+                    ans = x
+                    break            
+    
+        
+        
+elapsed = time.time() - start
+Printed = "found {} in {} seconds".format(ans,elapsed)
+print(Printed)
