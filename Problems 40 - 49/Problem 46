@@ -16,3 +16,21 @@ What is the smallest odd composite that cannot be written as the sum of a prime 
 */
 
 
+
+import time, math, string, sympy 
+
+prime_list = list(sympy.primerange(0,10000))
+
+end = 0
+for x in range(11,10000,2):
+    if end == 1:
+        break
+    for i in range(0,50):
+        if (x - 2*i*i ) in prime_list:
+            break
+        if i == 19:
+            answer = x
+            end = 1
+            break
+        
+print(answer)
