@@ -1,0 +1,34 @@
+/*
+
+It can be seen that the number, 125874, and its double, 251748, contain exactly the same digits, but in a different order.
+
+Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
+
+*/
+
+import time, math, string, sympy 
+import numpy as np
+start = time.time()
+
+def Digits(a,b,c,x, y, z):
+    return sorted(str(x)) == sorted(str(y)) == sorted(str(z)) == sorted(str(a)) == sorted(str(b)) == sorted(str(c))
+
+def main():
+    # I need to find the smallest value and then break
+    for x in range(100000,100000000):
+        x1 = x
+        x2 = 2*x
+        x3 = 3*x
+        x4 = 4*x
+        x5 = 5*x
+        x6 = 6*x
+        if Digits(x1,x2,x3,x4,x5,x6) == True:
+            Final = x1
+            break
+
+    elapsed = time.time() - start
+    Printed = "found {} in {} seconds".format(Final,elapsed)
+    return Printed
+    
+if __name__ == "__main__":
+    print(main())
