@@ -11,3 +11,40 @@ Which prime, below one-million, can be written as the sum of the most consecutiv
 
 */
 
+import time, math, string, sympy 
+import numpy as np
+start = time.time()
+
+def main():
+
+    topRange = 1000000
+
+    primerange = list(sympy.sieve.primerange(2,1000000))
+    counter2 = 0
+    
+    
+    for x in range(0,len(primerange)):
+        total = 0
+        counter1 = 0
+        
+        
+        for y in range(0,len(primerange)-x):
+            currentValue = primerange[x+y]
+            counter1 += 1
+            total += currentValue
+            if total >= topRange:
+                break
+            if sympy.isprime(total) == True and counter1 > counter2:
+                Final = total
+                counter2 = counter1
+        
+    
+    
+            
+          
+    elapsed = time.time() - start
+    Printed = "found {} in {} seconds".format(Final,elapsed)
+    return Printed
+    
+if __name__ == "__main__":
+    print(main())
