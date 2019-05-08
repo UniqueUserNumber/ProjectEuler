@@ -19,4 +19,52 @@ a square spiral with side length 9 will be formed. If this process is continued,
 
 */
 
-#Notes, like problem 28
+import time, math, string, sympy 
+import numpy as np
+import scipy
+start = time.time()
+
+def bottom_right_diagonal(i):
+    increment = (i-2)*(i-2)+((i-1))
+    return increment
+
+def top_right_diagonal(i):
+    increment = (i-2)*(i-2)+((i-1))*4
+    return increment
+
+def top_left_diagonal(i):
+    increment = (i-2)*(i-2)+((i-1))*3
+    return increment
+
+def bottom_left_diagonal(i):
+    increment = (i-2)*(i-2)+((i-1))*2
+    return increment
+
+
+def main():
+    primes = 0
+    nonprimes = 1
+    
+    for x in range(3,1000000,2):
+        Side = 0
+        if sympy.isprime(bottom_left_diagonal(x)) == True:
+            Side += 1
+        if sympy.isprime(bottom_right_diagonal(x)) == True:
+            Side += 1
+        if sympy.isprime(top_left_diagonal(x)) == True:
+            Side += 1
+        if sympy.isprime(top_right_diagonal(x)) == True:
+            Side += 1
+        primes += Side
+        nonprimes += 4 - Side
+        ratio = primes / (primes + nonprimes)
+        if ratio <= .1:
+            break
+            
+    Final = x  
+    elapsed = time.time() - start
+    Printed = "found {} in {} seconds".format(Final,elapsed)
+    return Printed
+    
+if __name__ == "__main__":
+    print(main())
