@@ -1,0 +1,33 @@
+/*
+
+The 5-digit number, 16807=7^5, is also a fifth power. 
+Similarly, the 9-digit number, 134217728=8^9, is a ninth power.
+
+How many n-digit positive integers exist which are also an nth power?
+
+*/
+
+import time, math, string, sympy 
+import numpy as np
+import scipy
+start = time.time()
+
+def main():
+    
+
+    counter = 0
+    cut = 1
+    for x in range(1,10):
+        for y in range(1,40):
+            remain = (x ** y) 
+            if len(str(remain)) == y :
+               counter += 1
+    
+    
+    Final = counter
+    elapsed = time.time() - start
+    Printed = "found {} in {} seconds".format(Final,elapsed)
+    return Printed
+    
+if __name__ == "__main__":
+    print(main())
