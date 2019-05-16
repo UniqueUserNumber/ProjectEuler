@@ -5,3 +5,71 @@ https://projecteuler.net/problem=68
 
 */
 
+import time, math, string, sympy 
+import numpy as np
+import scipy
+start = time.time()
+
+def main():
+    
+
+    x = 0
+    Test_List = []
+    ComboMax = 0
+    StringMax = 0
+    for state1 in range(6,7):
+        for state2 in range(7,11):
+            for state3 in range(7,11):
+                for state4 in range(7,11):
+                    for state5 in range(7,11):
+                        for state6 in range(1,6):
+                            for state7 in range(1,6):
+                                for state8 in range(1,6):
+                                    for state9 in range(1,6):
+                                        for state10 in range(1,6):
+                                            Test_List = []
+                                            Test_List.append(state1)
+                                            Test_List.append(state2)
+                                            Test_List.append(state3)
+                                            Test_List.append(state4)
+                                            Test_List.append(state5)
+                                            Test_List.append(state6)
+                                            Test_List.append(state7)
+                                            Test_List.append(state8)
+                                            Test_List.append(state9)
+                                            Test_List.append(state10)
+                                            if len(set(Test_List)) != len(Test_List):
+                                                continue
+                                            
+                                            
+                                            Combo1 = state1 + state6 + state7
+                                            Combo2 = state2 + state7 + state8
+                                            Combo3 = state3 + state8 + state9
+                                            Combo4 = state4 + state9 + state10
+                                            Combo5 = state5 + state10 + state6
+                                            
+                                            
+                                            
+                                            if (Combo1 == Combo2 == Combo3 == Combo4 == Combo5) & (Combo1 >= ComboMax):
+                                                Combo1str = str(state1) + str(state6) + str(state7)
+                                                Combo2str = str(state2) + str(state7) + str(state8)
+                                                Combo3str = str(state3) + str(state8) + str(state9)
+                                                Combo4str = str(state4) + str(state9) + str(state10)
+                                                Combo5str = str(state5) + str(state10) + str(state6)
+                                                String = int(Combo1str + Combo2str + Combo3str + Combo4str + Combo5str )
+                                                if String > StringMax:
+                                                    StringMax = String
+    
+                                                ComboMax = Combo1
+                                                
+                                                
+                                                
+                                                
+                        
+    Final = StringMax
+    elapsed = time.time() - start
+    Printed = "found {} in {} seconds".format(Final,elapsed)                
+    return Printed
+    
+if __name__ == "__main__":
+    print(main())
