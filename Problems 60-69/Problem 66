@@ -30,16 +30,19 @@ start = time.time()
 
 
 Limit = 0
-for d in range(950,1001):
-    for x in range(950,1001):
-        for y in range(1,1001):
-            if (x ** 2 - (d * (y ** 2))) == 1:
-                if x > Limit:
-                    Limit = x
-                    
+Start = 1000
+for d in range(500,1000):
+    print(d)
+    for y in range(Start,100000000):
 
-Final = Limit
+        if math.sqrt( 1 + d * y ** 2) % 1 == 0:
+            x = int(math.sqrt( 1 + d * y ** 2))
+            if x > Limit:
+                Limit = x
+                Start = y
+                Final = d
+                #print(str(d) + ' d ' + str(x) + ' x '  )
+                    
 elapsed = time.time() - start
 Printed = "found {} in {} seconds".format(Final,elapsed)
 print(Printed)
-
