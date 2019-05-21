@@ -5,10 +5,54 @@ The number 1 is considered to be relatively prime to every positive number, so �
 
 Interestingly, φ(87109)=79180, and it can be seen that 87109 is a permutation of 79180.
 
-Find the value of n, 1 < n < 107, for which φ(n) is a permutation of n and the ratio n/φ(n) produces a minimum.
+Find the value of n, 1 < n < 10^7, for which φ(n) is a permutation of n and the ratio n/φ(n) produces a minimum.
 
 */
 
 # Notes on how to solve. 3 step problem. Create a list/dictionary of the totient function numbers up to 10,000,000.
 # Then check if the number is a permutation of the x value.
 # If true, it will calculte the ratio and if it is the minimum so far, then this value will be stored.
+
+import time, math, string, sympy 
+import numpy as np
+import scipy
+import math, fractions
+start = time.time()
+
+
+def Euler_Totients(n):
+	Tots = list(range((n + 1))) #if range is (1,n+1), it will fail.
+	for i in range(2, len(Tots)):
+		if Tots[i] == i:  
+			for j in range(i, len(Tots), i):
+				Tots[j] -= Tots[j] // i
+	return Tots
+
+def permutations(a,b):
+    strA = str(a)
+    strB = str(b)
+    if sorted(strA) == sorted(strB):
+        return True
+
+def main():
+    solution = 0
+    minNum = 100
+    tot_list = Euler_Totients(10000000)
+    
+    for i in range(2,len(tot_list)):
+        CurTot =  tot_list[i]        
+        
+        if permutations(i,CurTot) == True:
+            currentValue = i/CurTot
+            if currentValue < minNum:
+                minNum = currentValue
+                solution = i
+    
+    elapsed = time.time() - start
+    Final = solution
+    Printed = "found {} in {} seconds".format(Final,elapsed)                
+    return Printed
+    
+if __name__ == "__main__":
+    print(main())
+  
